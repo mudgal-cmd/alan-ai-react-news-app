@@ -11,7 +11,7 @@ const App = () =>{
       
       key: alanKey, 
       onCommand: ({command, articles}) => {
-        // if(command === "testCommand")alert("Test Command Successfull");
+        if(command === "testCommand")alert("Test Command Successfull");
 
         if(command === "newHeadlines") console.log(articles);
       }
