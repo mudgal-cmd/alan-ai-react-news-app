@@ -1,19 +1,28 @@
 import alanBtn from "@alan-ai/alan-sdk-web";
-import { useEffect } from "react"; //to initialize the "alanBtn" or Alan AI.
+import { useState, useEffect } from "react"; //useEffect to initialize the "alanBtn"/Alan AI to show it on the screen after initial render.
+import NewsCards from "./Components/NewsCards/NewsCards";
 
 const alanKey ="f555823e5ab06d0c56e4b19c35eb81262e956eca572e1d8b807a3e2338fdd0dc/stage"; //Alan AI API key from the Alan Studio
 
 const App = () =>{
+
+  const[newsArticles, setNewsArticles] = useState([]);
 
   useEffect( ()=> {
 
     alanBtn({
       
       key: alanKey, 
-      onCommand: ({command, articles}) => {
-        if(command === "testCommand")alert("Test Command Successfull");
+      onCommand: ({command, savedArticles}) => {
+        // if(command === "testCommand")alert("Test Command Successfull");
 
-        if(command === "newHeadlines") console.log(articles);
+        if(command === "newHeadlines") {
+          console.log(savedArticles);
+          setNewsArticles(savedArticles);
+        }
+        // if(command === "getUsers"){
+        //   console.log(users);
+        // }
       }
 
 
@@ -25,6 +34,7 @@ const App = () =>{
   return (
     <div>
       <h1>Alan AI News Application</h1>
+      <NewsCards newsArticles = {newsArticles } />
     </div>
   );
 }
