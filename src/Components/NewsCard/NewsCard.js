@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const NewsCard = () => {
+const NewsCard = ({article, i}) => {
 
   return (
     <div>
