@@ -1,11 +1,19 @@
 import axios from "axios";
 
-const NewsCard = ({article, i}) => {
+import {Card, CardActions, CardActionArea, CardContent, CardMedia, Button, Typography} from "@mui/material";
+
+const NewsCard = () => {
 
   return (
-    <div>
-      News Card
-    </div>
+
+    <Card>
+      {/* Clickable part */}
+      <CardActionArea>
+
+      </CardActionArea> 
+
+    </Card>
+
   );
 
 }

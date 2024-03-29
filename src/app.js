@@ -13,16 +13,13 @@ const App = () =>{
     alanBtn({
       
       key: alanKey, 
-      onCommand: ({command, savedArticles}) => {
+      onCommand: ({command, articles}) => {
         // if(command === "testCommand")alert("Test Command Successfull");
 
         if(command === "newHeadlines") {
-          console.log(savedArticles);
-          setNewsArticles(savedArticles);
+          console.log(articles);
+          setNewsArticles(articles);
         }
-        // if(command === "getUsers"){
-        //   console.log(users);
-        // }
       }
 
 
