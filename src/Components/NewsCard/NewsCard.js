@@ -14,7 +14,7 @@ const NewsCard = ({article: { description, publishedAt, source, title, url, urlT
 
         {/* The image won't be visible until we specify the constant card height */}
         <Box sx={{height : 200}}>
-        <CardMedia image={urlToImage || "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR5f5uYYfdPGCG1mCoKyS03z1SRkzMPLApHAt-rh7Y3IA&s"} component={"img"} />
+        <CardMedia image={urlToImage || "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR5f5uYYfdPGCG1mCoKyS03z1SRkzMPLApHAt-rh7Y3IA&s"} />
         {/* Explicitely passing img component as a prop */}
         </Box>
 
