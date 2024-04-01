@@ -6,7 +6,9 @@ import { Grid, Grow, Typography } from "@mui/material";
 // typography - for text
 //to make our application mobile-friendly, nice text & animation for the cards.
 
-// import useStyles from "./styles"
+import StylesGrid from "./styles";
+
+
 
 import Box from "@mui/material/Box";
 
@@ -22,7 +24,8 @@ const NewsCards = ({ newsArticles }) => {
     // "in" ensures that if true then only transition will happen.
     <Grow in>
       {/* //this will contain all of our items. */}
-      <Box sx = {{padding: "0 5%", margin: "0", width: "100%"}}>
+      {/* <Box sx = {{padding: "0 5%", margin: "0", width: "100%"}}> */}
+      <StylesGrid>
 
       <Grid  container alignItems={"stretch"} spacing={3}>
         {/* //Another grid for a singular NewsCard/article item. */}
@@ -38,7 +41,8 @@ const NewsCards = ({ newsArticles }) => {
 
 
       </Grid>
-      </Box>
+      </StylesGrid>
+      {/* </Box> */}
 
 
     </Grow>
