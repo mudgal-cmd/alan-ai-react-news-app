@@ -1,6 +1,7 @@
 import { styled } from "@mui/material/styles";
 import {Grid} from "@mui/material";
 import {CardMedia} from "@mui/material";
+
 // Below is the way to style material ui components.
 const StylesGrid = styled(Grid)({
 
@@ -10,8 +11,12 @@ const StylesGrid = styled(Grid)({
 
 });
 
-const StyleCardMedia = styled(CardMedia)({
-  
+const StylesCardMedia = styled(CardMedia)({
+
+  height: "200px"
+
 });
 
-export default StylesGrid;
+
+
+export const styles = {StylesGrid};
