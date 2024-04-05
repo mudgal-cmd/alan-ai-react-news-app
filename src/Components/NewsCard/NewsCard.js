@@ -1,27 +1,29 @@
-import Box from "@mui/material/Box";
+import { CardActions, CardActionArea, CardContent, Button, Typography } from "@mui/material";
 
-import { Card, CardActions, CardActionArea, CardContent, CardMedia, Button, Typography } from "@mui/material";
+// Removed Card and CardMedia component from the import list as we're using the CardStyles and CardMediaStyles components in place of them to clean up our code. 
 
-import PropTypes  from "prop-types";
-// import { StylesCardMedia } from "./styles";
+import PropTypes from "prop-types";
+
+import { CardMediaStyles, CardStyles } from "./NewsCardStyles"
 
 const NewsCard = ({ article: { description, publishedAt, source, title, url, urlToImage }, i }) => { //destructuring the data from article object.
 
   return (
 
-    <Card>
+    <CardStyles>
+      {/* <Card> */}
       {/* Clickable part */}
       <CardActionArea>
 
         {/* Card Media will contain the image, hence a self closing tag like <img/> */}
 
         {/* The image won't be visible until we specify the constant card height */}
-        {/* <StylesCardMedia> */}
-        <Box sx={{height: "200px"}}>
-          <CardMedia image={urlToImage || "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR5f5uYYfdPGCG1mCoKyS03z1SRkzMPLApHAt-rh7Y3IA&s"} component={"img"} />
-          {/* Explicitely passing img component as a prop */}
-        {/* </StylesCardMedia> */}
-        </Box>
+
+
+        {/* Likewise here instead of using the CardMedia only we can use the CardMediaStyles component that not only provides a CardMedia but applies the styles to it as well */}
+        <CardMediaStyles image={urlToImage || "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR5f5uYYfdPGCG1mCoKyS03z1SRkzMPLApHAt-rh7Y3IA&s"} component={"img"} />
+        {/* Explicitely passing img component as a prop */}
+
         <div>
           {/* variant = "body2" for the small text */}
           {/* All text should be put under Typography in Material UI. Helps in styling it */}
@@ -45,7 +47,9 @@ const NewsCard = ({ article: { description, publishedAt, source, title, url, url
         <Typography variant="h5" color={"textSecondary"}>{i + 1}</Typography>
       </CardActions>
 
-    </Card>
+      {/* </Card> */}
+    </CardStyles>
+    // We can simply use the CardStyles (containing styles for Card component) in place of the normal Card component and wrap everything inside the CardStyles instead of Card. 
 
   );
 
@@ -54,6 +58,6 @@ const NewsCard = ({ article: { description, publishedAt, source, title, url, url
 NewsCard.propTypes = {
   article: PropTypes.object.isRequired,
   i: PropTypes.number
-}  
+}
 
 export default NewsCard;
