@@ -1,6 +1,6 @@
 import NewsCard from "../NewsCard/NewsCard";
 
-import { Grid, Grow, Typography } from "@mui/material";
+import { Grid, Grow } from "@mui/material";
 // grid - mobile friendly / viewport friendly
 // grow - animation
 // typography - for text
@@ -8,11 +8,27 @@ import { Grid, Grow, Typography } from "@mui/material";
 
 import { StylesGrid } from "./styles";
 
-import Box from "@mui/material/Box";
+const infoCards = [
+  { color: '#00838f', title: 'Latest News', text: 'Give me the latest news' },
+  { color: '#1565c0', title: 'News by Categories', info: 'Business, Entertainment, General, Health, Science, Sports, Technology', text: 'Give me the latest Technology news' },
+  { color: '#4527a0', title: 'News by Terms', info: 'Bitcoin, PlayStation 5, Smartphones, Donald Trump...', text: 'What\'s up with PlayStation 5' },
+  { color: '#283593', title: 'News by Sources', info: 'CNN, Wired, BBC News, Time, IGN, Buzzfeed, ABC News...', text: 'Give me the news from CNN' },
+]; //static data for the initial cards on the homepage
 
 const NewsCards = ({ newsArticles }) => {
 
-  // const classes = useStyles();
+
+  if(!newsArticles.length){
+
+    return (
+      <Grow in>
+        <StylesGrid container alignItems={"stretch"} spacing={3}>
+          Test
+        </StylesGrid>
+      </Grow>
+    )
+
+  }
 
   return (
     //we will no longer use div
