@@ -4,7 +4,7 @@ import { CardActions, CardActionArea, CardContent, Button, Typography } from "@m
 
 import PropTypes from "prop-types";
 
-import { CardMediaStyles, CardStyles } from "./NewsCardStyles"
+import { CardMediaStyles, CardStyles, CardDetailStyles, TypographyTitleStyles, CardActionStyles } from "./NewsCardStyles"
 
 const NewsCard = ({ article: { description, publishedAt, source, title, url, urlToImage }, i }) => { //destructuring the data from article object.
 
@@ -24,16 +24,16 @@ const NewsCard = ({ article: { description, publishedAt, source, title, url, url
         <CardMediaStyles image={urlToImage || "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR5f5uYYfdPGCG1mCoKyS03z1SRkzMPLApHAt-rh7Y3IA&s"} component={"img"} />
         {/* Explicitely passing img component as a prop */}
 
-        <div>
+        <CardDetailStyles>
           {/* variant = "body2" for the small text */}
           {/* All text should be put under Typography in Material UI. Helps in styling it */}
 
           {/* Creating JS date object and fetching the date. */}
           <Typography variant="body2" color={"textSecondary"} component={"h2"}>{(new Date(publishedAt)).toDateString()}</Typography>
           <Typography variant="body2" color={"textSecondary"} component={"h2"}>{source.name}</Typography>
-        </div>
+        </CardDetailStyles>
         {/* gutterBottom for some margin or padding at the bottom */}
-        <Typography gutterBottom variant="h5">{title}</Typography>
+        <TypographyTitleStyles gutterBottom variant="h5">{title}</TypographyTitleStyles>
         <CardContent>
           <Typography variant="body2" color={"textSecondary"} component={"p"}>{description}</Typography>
         </CardContent>
@@ -42,10 +42,10 @@ const NewsCard = ({ article: { description, publishedAt, source, title, url, url
 
       {/* CardActions will contain all the buttons */}
 
-      <CardActions>
+      <CardActionStyles>
         <Button size="small" color="primary">Learn More</Button>
         <Typography variant="h5" color={"textSecondary"}>{i + 1}</Typography>
-      </CardActions>
+      </CardActionStyles>
 
       {/* </Card> */}
     </CardStyles>
