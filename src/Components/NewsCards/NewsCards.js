@@ -1,12 +1,12 @@
 import NewsCard from "../NewsCard/NewsCard";
 
-import { Grid, Grow } from "@mui/material";
+import { Grid, Grow, Typography } from "@mui/material";
 // grid - mobile friendly / viewport friendly
 // grow - animation
 // typography - for text
 //to make our application mobile-friendly, nice text & animation for the cards.
 
-import { StylesGrid } from "./styles";
+import { StylesGrid, CardStyles, InfoCardGridStyles } from "./NewsCardsStyles";
 
 const infoCards = [
   { color: '#00838f', title: 'Latest News', text: 'Give me the latest news' },
@@ -18,12 +18,33 @@ const infoCards = [
 const NewsCards = ({ newsArticles }) => {
 
 
-  if(!newsArticles.length){
+  if (!newsArticles.length) {
 
     return (
       <Grow in>
         <StylesGrid container alignItems={"stretch"} spacing={3}>
-          Test
+          {infoCards.map(infoCard => (
+
+            // InfoCardGridStyles
+            <InfoCardGridStyles item xs={12} sm={6} md={4} lg={3}> 
+              <CardStyles style={{ backgroundColor: infoCard.color }}>
+                <Typography>
+                  {infoCard.title}
+                </Typography>
+                {infoCard.info ? //Display card info only for the items that actually include that information.
+                  (<Typography>
+                    <strong>
+                      {/* making the important keywords in the title bold */}
+                      {infoCard.title.split(" ")[2]}: 
+                    </strong>
+                    <br />
+                    {infoCard.info}
+                  </Typography>) : null}
+                  <Typography>Try Saying: <br/> <em>{infoCard.text}</em></Typography>
+              </CardStyles>
+            </InfoCardGridStyles>
+
+          ))}
         </StylesGrid>
       </Grow>
     )
@@ -47,7 +68,7 @@ const NewsCards = ({ newsArticles }) => {
 
             // xs = {12} means 1 card per row. In material UI a grid has a total of 12 spaces, so if 12 spaces are occupied by 1 card that means 1 card per row.
             <Grid item xs={12} sm={6} md={4} lg={3} style={{ display: "flex" }}>
-              
+
               <NewsCard article={article} i={i} />
 
             </Grid>
