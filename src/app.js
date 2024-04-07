@@ -15,15 +15,27 @@ const App = () =>{
 
   useEffect( ()=> {
 
-    alanBtn({ //prompt shown on the web page to use the alan AI
+    alanBtn({ //prompt/alan logo widget shown on the web page to use the alan AI
       
       key: alanKey, 
       onCommand: ({command, articles}) => {
         // if(command === "testCommand")alert("Test Command Successfull");
 
         if(command === "newHeadlines") {
+          
+          console.log(articles);
+          
+          setNewsArticles(articles.filter(article => article.id!==null));
+        }
+
+        else if (command === "termsHeadlines"){
+          setNewsArticles(articles.filter(article => article.source.id!==null));
+        }
+
+        else if(command === "categoryHeadlines"){
           setNewsArticles(articles);
         }
+
       }
 
 
@@ -38,8 +50,9 @@ const App = () =>{
       <AlanLogoContainerStyles> 
         {/* AlanLogo */}
         <AlanLogoStyles src={alanLogoSrc} alt="alan logo"></AlanLogoStyles>
+
       </AlanLogoContainerStyles>
-      <NewsCards newsArticles = {newsArticles } /> 
+      <NewsCards newsArticles = { newsArticles } /> 
     </div>
   );
 }

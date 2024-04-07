@@ -9,7 +9,9 @@ export const AlanLogoContainerStyles = styled("div")(({theme})=> ({
   [theme.breakpoints.down('sm')]: {
     flexDirection: 'column-reverse',
     textAlign: 'center',
-  }
+  },
+  backgroundColor: "#283593",
+  marginBottom: "3%"
 }));
 
 export const AlanLogoStyles = styled("img")(({theme}) => ({
