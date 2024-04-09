@@ -1,6 +1,7 @@
 {
   "name": "alan-ai-react-news-app",
   "version": "0.1.0",
+  "homepage": "https://mudgal-cmd.github.io/alan-ai-react-news-app",
   "private": true,
   "dependencies": {
     "@alan-ai/alan-sdk-web": "^1.8.54",
@@ -20,6 +21,8 @@
     "words-to-numbers": "^1.5.1"
   },
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy" : "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
@@ -42,5 +45,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "gh-pages": "^6.1.1"
   }
 }

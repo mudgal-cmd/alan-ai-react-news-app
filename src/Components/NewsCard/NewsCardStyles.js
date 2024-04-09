@@ -1,19 +1,10 @@
 import { styled } from "@mui/material/styles";
-import { CardMedia, Card, Typography, CardActions } from "@mui/material";
+import { Card, Typography, CardActions } from "@mui/material";
 
-
-export const CardMediaStyles = styled(CardMedia)({
-
-  height: "250",
-  objectFit: "cover"
-
-});
-
-export const CardStyles = styled(Card)({
+export const CardStyles = styled(Card) ({
   display: 'flex',
   flexDirection: 'column',
   justifyContent: "space-between",
-  borderBottom: '10px solid white',
 });
 
 export const CardDetailStyles = styled("div")({
@@ -31,3 +22,7 @@ export const CardActionStyles = styled(CardActions)({
   display: 'flex',
   justifyContent: 'space-between'
 });
+
+export const activeCard = {
+  borderBottom : "10px solid #22289a"
+}

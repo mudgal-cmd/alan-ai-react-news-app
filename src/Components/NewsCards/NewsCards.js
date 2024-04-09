@@ -15,8 +15,9 @@ const infoCards = [
   { color: '#283593', title: 'News by Sources', info: 'CNN, Wired, BBC News, Time, IGN, Buzzfeed, ABC News...', text: 'Give me the news from CNN' },
 ]; //static data for the initial cards on the homepage
 
-const NewsCards = ({ newsArticles }) => {
 
+
+const NewsCards = ({ newsArticles, currentArticle }) => {
 
   if (!newsArticles.length) {
 
@@ -69,7 +70,7 @@ const NewsCards = ({ newsArticles }) => {
             // xs = {12} means 1 card per row. In material UI a grid has a total of 12 spaces, so if 12 spaces are occupied by 1 card that means 1 card per row.
             <Grid item xs={12} sm={6} md={4} lg={3} style={{ display: "flex" }}>
 
-              <NewsCard article={article} i={i} />
+              <NewsCard article={article} currentArticle = {currentArticle} i={i} />
 
             </Grid>
           ))}

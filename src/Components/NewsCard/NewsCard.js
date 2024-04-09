@@ -1,16 +1,20 @@
-import { CardActions, CardActionArea, CardContent, Button, Typography } from "@mui/material";
+import { CardActions, CardActionArea, CardContent, Button, Typography, CardMedia } from "@mui/material";
 
 // Removed Card and CardMedia component from the import list as we're using the CardStyles and CardMediaStyles components in place of them to clean up our code. 
 
 import PropTypes from "prop-types";
 
-import { CardMediaStyles, CardStyles, CardDetailStyles, TypographyTitleStyles, CardActionStyles } from "./NewsCardStyles"
+import classNames from "classnames";
 
-const NewsCard = ({ article: { description, publishedAt, source, title, url, urlToImage }, i }) => { //destructuring the data from article object.
+import {  CardStyles, CardDetailStyles, TypographyTitleStyles, CardActionStyles } from "./NewsCardStyles"
+
+const NewsCard = ({ article: { description, publishedAt, source, title, url, urlToImage }, i, currentArticle }) => { //destructuring the data from article object.
 
   return (
-
-    <CardStyles>
+    // Conditionally applying styles/highlighting only the Card currently being read by Alan
+    <CardStyles sx={{
+      borderBottom: currentArticle === i? "10px solid #22289a": "10px solid white"
+    }}> 
       {/* <Card> */}
       {/* Clickable part */}
       <CardActionArea>
@@ -21,7 +25,14 @@ const NewsCard = ({ article: { description, publishedAt, source, title, url, url
 
 
         {/* Likewise here instead of using the CardMedia only we can use the CardMediaStyles component that not only provides a CardMedia but applies the styles to it as well */}
-        <CardMediaStyles image={urlToImage || "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR5f5uYYfdPGCG1mCoKyS03z1SRkzMPLApHAt-rh7Y3IA&s"} component={"img"} />
+
+        <CardMedia 
+          image={urlToImage || "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR5f5uYYfdPGCG1mCoKyS03z1SRkzMPLApHAt-rh7Y3IA&s"} component ="img" 
+          sx={{
+            objectFit: "cover",
+          }}
+          height={"200"}/>
+
         {/* Explicitely passing img component as a prop */}
 
         <CardDetailStyles>

@@ -13,6 +13,8 @@ const App = () =>{
 
   const[newsArticles, setNewsArticles] = useState([]); //hook to manage the news articles state.
 
+  const [currentArticle, setCurrentArticle] = useState(-1) //index of the article set to 0
+
   useEffect( ()=> {
 
     alanBtn({ //prompt/alan logo widget shown on the web page to use the alan AI
@@ -25,15 +27,21 @@ const App = () =>{
           
           console.log(articles);
           
-          setNewsArticles(articles.filter(article => article.id!==null));
+          setNewsArticles(articles.filter(article => article.source.id!==null));
         }
 
         else if (command === "termsHeadlines"){
           setNewsArticles(articles.filter(article => article.source.id!==null));
+          setCurrentArticle(-1);
         }
 
         else if(command === "categoryHeadlines"){
           setNewsArticles(articles);
+          setCurrentArticle(-1);
+        }
+
+        else if(command === "newsHighlights"){
+          setCurrentArticle((prevActiveArticle) => prevActiveArticle+1);
         }
 
       }
@@ -49,10 +57,10 @@ const App = () =>{
       {/* LogoContainer */}
       <AlanLogoContainerStyles> 
         {/* AlanLogo */}
-        <AlanLogoStyles src={alanLogoSrc} alt="alan logo"></AlanLogoStyles>
+        <AlanLogoStyles src={process.env.PUBLIC_URL + alanLogoSrc} alt="alan logo"></AlanLogoStyles>
 
       </AlanLogoContainerStyles>
-      <NewsCards newsArticles = { newsArticles } /> 
+      <NewsCards newsArticles = { newsArticles } currentArticle = {currentArticle} /> 
     </div>
   );
 }
