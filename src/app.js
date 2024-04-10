@@ -2,7 +2,7 @@ import alanBtn from "@alan-ai/alan-sdk-web";
 import { useState, useEffect } from "react"; //useEffect to initialize the "alanBtn"/Alan AI to show it on the screen after initial render.
 import NewsCards from "./Components/NewsCards/NewsCards";
 import { AlanLogoContainerStyles, AlanLogoStyles } from "./styles";
-import wordsToNumbers from "words-to-numbers";
+import wordsToNumbers from "words-to-numbers"; //convert text/string to integer numbers
 
 // import NewsCard from "../public/alan-logo.jpg";
 
@@ -15,7 +15,7 @@ const App = () =>{
   const[newsArticles, setNewsArticles] = useState([]); //hook to manage the news articles state.
 
   const [currentArticle, setCurrentArticle] = useState(-1) //index of the article set to 0
-
+let alanInstance;
   useEffect( ()=> {
 
     alanBtn({ //prompt/alan logo widget shown on the web page to use the alan AI
@@ -23,6 +23,8 @@ const App = () =>{
       key: alanKey, 
       onCommand: ({command, articles, number}) => {
         // if(command === "testCommand")alert("Test Command Successfull");
+
+        if(!alanInstance)alanInstance = this;
 
         if(command === "newHeadlines") {
           
@@ -47,10 +49,21 @@ const App = () =>{
 
         else if(command === "openArticleByNumber"){
           console.log(number, typeof number);
-          const parsedNumber = number.length>2? wordsToNumbers(number, {fuzzy: true}): number //fuzzy: true 
+          const parsedNumber = number.length > 2 ? wordsToNumbers(number, {fuzzy: true}): number; //fuzzy : true will match the string to the closest number. Ex: for => 4. 
+          //fuzzy: true 
+          console.log(parsedNumber);
+          // console.log();
+          if(parsedNumber>=20){
+            alanInstance.playText(`Article number ${parsedNumber} not found. Please try again`);
+          }
+          else{
+            
+            const openArticle = articles[parsedNumber-1]; //Since, index starts from 0.
+
+            window.open(openArticle.url, "_blank");
+
+          }
           
-          // console.log(newsArticles[1].url);
-          window.open(`${articles[parsedNumber].url}`, "_blank");
         }
 
       }
