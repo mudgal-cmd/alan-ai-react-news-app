@@ -1,20 +1,42 @@
-import { CardActions, CardActionArea, CardContent, Button, Typography, CardMedia } from "@mui/material";
+import { CardActionArea, CardContent, Button, Typography, CardMedia } from "@mui/material";
 
+import {useState, useEffect, createRef} from "react"
 // Removed Card and CardMedia component from the import list as we're using the CardStyles and CardMediaStyles components in place of them to clean up our code. 
 
 import PropTypes from "prop-types";
-
-import classNames from "classnames";
 
 import {  CardStyles, CardDetailStyles, TypographyTitleStyles, CardActionStyles } from "./NewsCardStyles"
 
 const NewsCard = ({ article: { description, publishedAt, source, title, url, urlToImage }, i, currentArticle }) => { //destructuring the data from article object.
 
+  const [cardsRefs, setCardRefs] = useState([]);
+
+  const scrollToRef = (ref) => {
+    window.scroll(0, ref.current.offsetTop - 50); //x-axis - 0 and y-axis scroll to almost top not exactly at the top of the cards.
+  }
+
+  useEffect(()=>{
+    
+    setCardRefs((refs) => Array(50).fill().map((_, index) => refs[index] || createRef())); // checking if the refs already exist for a card at index - 'index', else create a new ref
+
+  }, []); //call setCardRefs on initial render and  
+
+
+  useEffect(()=> {
+
+    if(i === currentArticle && cardsRefs[currentArticle]){
+      scrollToRef(cardsRefs[currentArticle]);
+    }
+
+  }, [i, currentArticle, cardsRefs]); //this useEffect will update everytime i or currentArticle or cardRefs value changes. Ensure that these values are enclosed in the dependency array because useEffect needs an array.
+
+  //using createRef instead of 'useRef' because each card will have its own reference and we do not want the ref value to be persisted/same value to be used throughout all the cards.
+
   return (
     // Conditionally applying styles/highlighting only the Card currently being read by Alan
     <CardStyles sx={{
       borderBottom: currentArticle === i? "10px solid #22289a": "10px solid white"
-    }}> 
+    }} ref={cardsRefs[i]}> 
       {/* <Card> */}
       {/* Clickable part */}
       <CardActionArea>

@@ -2,6 +2,7 @@ import alanBtn from "@alan-ai/alan-sdk-web";
 import { useState, useEffect } from "react"; //useEffect to initialize the "alanBtn"/Alan AI to show it on the screen after initial render.
 import NewsCards from "./Components/NewsCards/NewsCards";
 import { AlanLogoContainerStyles, AlanLogoStyles } from "./styles";
+import wordsToNumbers from "words-to-numbers";
 
 // import NewsCard from "../public/alan-logo.jpg";
 
@@ -20,7 +21,7 @@ const App = () =>{
     alanBtn({ //prompt/alan logo widget shown on the web page to use the alan AI
       
       key: alanKey, 
-      onCommand: ({command, articles}) => {
+      onCommand: ({command, articles, number}) => {
         // if(command === "testCommand")alert("Test Command Successfull");
 
         if(command === "newHeadlines") {
@@ -42,6 +43,14 @@ const App = () =>{
 
         else if(command === "newsHighlights"){
           setCurrentArticle((prevActiveArticle) => prevActiveArticle+1);
+        }
+
+        else if(command === "openArticleByNumber"){
+          console.log(number, typeof number);
+          const parsedNumber = number.length>2? wordsToNumbers(number, {fuzzy: true}): number //fuzzy: true 
+          
+          // console.log(newsArticles[1].url);
+          window.open(`${articles[parsedNumber].url}`, "_blank");
         }
 
       }
