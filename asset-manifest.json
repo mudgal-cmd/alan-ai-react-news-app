@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/alan-ai-react-news-app/static/css/main.ff73cdbd.css",
-    "main.js": "/alan-ai-react-news-app/static/js/main.75abe4c9.js",
+    "main.js": "/alan-ai-react-news-app/static/js/main.aba98668.js",
     "index.html": "/alan-ai-react-news-app/index.html",
     "main.ff73cdbd.css.map": "/alan-ai-react-news-app/static/css/main.ff73cdbd.css.map",
-    "main.75abe4c9.js.map": "/alan-ai-react-news-app/static/js/main.75abe4c9.js.map"
+    "main.aba98668.js.map": "/alan-ai-react-news-app/static/js/main.aba98668.js.map"
   },
   "entrypoints": [
     "static/css/main.ff73cdbd.css",
-    "static/js/main.75abe4c9.js"
+    "static/js/main.aba98668.js"
   ]
 }
