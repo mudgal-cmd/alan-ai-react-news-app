@@ -3,12 +3,13 @@ import { useState, useEffect } from "react"; //useEffect to initialize the "alan
 import NewsCards from "./Components/NewsCards/NewsCards";
 import { AlanLogoContainerStyles, AlanLogoStyles } from "./styles";
 import wordsToNumbers from "words-to-numbers"; //convert text/string to integer numbers
+import { BrowserRouter as Router } from "react-router-dom";
 
 // import NewsCard from "../public/alan-logo.jpg";
 
 const alanKey ="f555823e5ab06d0c56e4b19c35eb81262e956eca572e1d8b807a3e2338fdd0dc/stage"; //Alan AI API key from the Alan Studio
 
-const alanLogoSrc = "/alan-logo.png";
+const alanLogoSrc = "/alan-logo.webp";
 
 const App = () =>{
 
@@ -52,7 +53,6 @@ let alanInstance;
           const parsedNumber = number.length > 2 ? wordsToNumbers(number, {fuzzy: true}): number; //fuzzy : true will match the string to the closest number. Ex: for => 4. 
           //fuzzy: true 
           console.log(parsedNumber);
-          // console.log();
           if(parsedNumber>=20){
             alanInstance.playText(`Article number ${parsedNumber} not found. Please try again`);
           }
@@ -75,6 +75,7 @@ let alanInstance;
   }, []);
 
   return (
+    <Router>
     <div>
       {/* LogoContainer */}
       <AlanLogoContainerStyles> 
@@ -84,6 +85,7 @@ let alanInstance;
       </AlanLogoContainerStyles>
       <NewsCards newsArticles = { newsArticles } currentArticle = {currentArticle} /> 
     </div>
+    </Router>
   );
 }
 

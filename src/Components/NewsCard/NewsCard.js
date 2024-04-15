@@ -1,11 +1,13 @@
 import { CardActionArea, CardContent, Button, Typography, CardMedia } from "@mui/material";
 
-import {useState, useEffect, createRef} from "react"
+import {useState, useEffect, createRef} from "react";
 // Removed Card and CardMedia component from the import list as we're using the CardStyles and CardMediaStyles components in place of them to clean up our code. 
 
 import PropTypes from "prop-types";
 
-import {  CardStyles, CardDetailStyles, TypographyTitleStyles, CardActionStyles } from "./NewsCardStyles"
+import {  CardStyles, CardDetailStyles, TypographyTitleStyles, CardActionStyles } from "./NewsCardStyles";
+
+import {Link} from "react-router-dom";
 
 const NewsCard = ({ article: { description, publishedAt, source, title, url, urlToImage }, i, currentArticle }) => { //destructuring the data from article object.
 
@@ -76,7 +78,9 @@ const NewsCard = ({ article: { description, publishedAt, source, title, url, url
       {/* CardActions will contain all the buttons */}
 
       <CardActionStyles>
-        <Button size="small" color="primary">Learn More</Button>
+        <Button size="small" color="primary">
+          <Link to={url} style={{textDecoration: "none", color: "inherit"}}>Learn More</Link>
+        </Button>
         <Typography variant="h5" color={"textSecondary"}>{i + 1}</Typography>
       </CardActionStyles>
 
