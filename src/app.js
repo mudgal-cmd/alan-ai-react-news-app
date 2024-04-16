@@ -15,55 +15,61 @@ const App = () =>{
 
   const[newsArticles, setNewsArticles] = useState([]); //hook to manage the news articles state.
 
-  const [currentArticle, setCurrentArticle] = useState(-1) //index of the article set to 0
-let alanInstance;
-  useEffect( ()=> {
+  const [currentArticle, setCurrentArticle] = useState(-1) //index of the article set to -1, because articles array start with index 0
 
+  useEffect( ()=> {
+    let alanInstance;
     alanBtn({ //prompt/alan logo widget shown on the web page to use the alan AI
       
       key: alanKey, 
       onCommand: ({command, articles, number}) => {
         // if(command === "testCommand")alert("Test Command Successfull");
+        alanInstance = this;
+        switch(command){
 
-        if(!alanInstance)alanInstance = this;
+          case "newHeadlines":
 
-        if(command === "newHeadlines") {
+            console.log(articles);
           
-          console.log(articles);
+            setNewsArticles(articles.filter(article => article.source.id!==null));
+
+            break;
           
-          setNewsArticles(articles.filter(article => article.source.id!==null));
-        }
+          case "termsHeadlines":
+            setNewsArticles(articles.filter(article => article.source.id!==null));
+            setCurrentArticle(-1); //index of the article set to -1, because articles array start with index 0
 
-        else if (command === "termsHeadlines"){
-          setNewsArticles(articles.filter(article => article.source.id!==null));
-          setCurrentArticle(-1);
-        }
+            break;
 
-        else if(command === "categoryHeadlines"){
-          setNewsArticles(articles);
-          setCurrentArticle(-1);
-        }
+          case "categoryHeadlines":
+            setNewsArticles(articles);
+            setCurrentArticle(-1);//index of the article set to -1, because articles array start with index 0
 
-        else if(command === "newsHighlights"){
-          setCurrentArticle((prevActiveArticle) => prevActiveArticle+1);
-        }
+            break;
+          
+          case "newsHighlights":
+            setCurrentArticle((prevActiveArticle) => prevActiveArticle+1);
 
-        else if(command === "openArticleByNumber"){
-          console.log(number, typeof number);
-          const parsedNumber = number.length > 2 ? wordsToNumbers(number, {fuzzy: true}): number; //fuzzy : true will match the string to the closest number. Ex: for => 4. 
-          //fuzzy: true 
-          console.log(parsedNumber);
-          if(parsedNumber>=20){
-            alanInstance.playText(`Article number ${parsedNumber} not found. Please try again`);
-          }
-          else{
+            break;
+          
+          case "openArticleByNumber":
+            console.log(number, typeof number);
+            const parsedNumber = number.length > 2 ? wordsToNumbers(number, {fuzzy: true}): number; //fuzzy : true will match the string to the closest number. Ex: for => 4. 
+            //fuzzy: true 
+            console.log(parsedNumber);
+            if(parsedNumber>=20){
+              alanInstance.playText(`Article number ${parsedNumber} not found. Please try again`);
+            }
+            else{
             
-            const openArticle = articles[parsedNumber-1]; //Since, index starts from 0.
+              const openArticle = articles[parsedNumber-1]; //Since, index starts from 0.
 
-            window.open(openArticle.url, "_blank");
+              window.open(openArticle.url, "_blank");
 
-          }
-          
+            }
+
+            break;
+
         }
 
       }
