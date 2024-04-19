@@ -9,7 +9,7 @@ import {  CardStyles, CardDetailStyles, TypographyTitleStyles, CardActionStyles 
 
 import {Link} from "react-router-dom";
 
-const NewsCard = ({ article: { description, publishedAt, source, title, url, urlToImage }, i, currentArticle }) => { //destructuring the data from article object.
+const NewsCard = ({ article: { description, publishedAt, source, title, url, urlToImage }, i, currentArticle, newsArticles }) => { //destructuring the data from article object.
 
   const [cardsRefs, setCardRefs] = useState([]);
 
@@ -19,7 +19,7 @@ const NewsCard = ({ article: { description, publishedAt, source, title, url, url
 
   useEffect(()=>{
     
-    setCardRefs((refs) => Array(50).fill().map((_, index) => refs[index] || createRef())); // checking if the refs already exist for a card at index - 'index', else create a new ref
+    setCardRefs((refs) => Array(newsArticles.length-1).fill().map((_, index) => refs[index] || createRef())); // checking if the refs already exist for a card at index - 'index', else create a new ref
 
   }, []); //call setCardRefs on initial render and  
 
